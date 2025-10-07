@@ -8,16 +8,26 @@ Com a base limpa nos optamos por quebrar a mesma em pedaços para melhorar a per
 
 ## Fine Tunning
 
-Optamos por utilizar o modelo `unsloth/llama-3-8b-bnb-4bit` com os seguintes parametros 
+Optamos por utilizar o modelo `unsloth/llama-3-8b-bnb-4bit` com os seguintes parametros:
 
-per_device_train_batch_size=1,
-gradient_accumulation_steps=8,
-learning_rate=2e-4,           
-fp16=True,
-logging_steps=50,
-save_strategy="steps",
-save_steps=1000,
-num_train_epochs=1,
-max_steps=4000,
-save_total_limit=5,
+per_device_train_batch_size=1
+
+gradient_accumulation_steps=8
+
+learning_rate=2e-4      
+
+fp16=True
+
+logging_steps=50
+
+save_strategy="steps"
+
+save_steps=1000
+
+num_train_epochs=1
+
+max_steps=4000
+
+save_total_limit=5
+
 report_to="none"
