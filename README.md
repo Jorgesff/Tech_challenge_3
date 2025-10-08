@@ -8,26 +8,58 @@ Com a base limpa nos optamos por quebrar a mesma em pedaços para melhorar a per
 
 ## Fine Tunning
 
-Optamos por utilizar o modelo `unsloth/llama-3-8b-bnb-4bit` com os seguintes parametros:
+### BATCH - Otimizado para A100 sem estourar RAM
+per_device_train_batch_size=24,  # Máximo seguro para A100
 
-per_device_train_batch_size=1
+per_device_eval_batch_size=24,
 
-gradient_accumulation_steps=8
+gradient_accumulation_steps=1,  # Sem acumulação = mais rápido
 
-learning_rate=2e-4      
+### LEARNING
+learning_rate=5e-4,
 
-fp16=True
+lr_scheduler_type="cosine",
 
-logging_steps=50
+warmup_ratio=0.03,
 
-save_strategy="steps"
+### PRECISÃO
+bf16=True,
 
-save_steps=1000
+bf16_full_eval=True,
 
-num_train_epochs=1
+### LOGGING MÍNIMO
+logging_steps=100,
 
-max_steps=4000
+logging_first_step=True,
 
-save_total_limit=5
+### SEM SALVAMENTO DURANTE TREINO
+save_strategy="no",
 
-report_to="none"
+save_steps=999999,
+
+### AVALIAÇÃO MÍNIMA
+eval_strategy="steps",
+
+eval_steps=500,  # Apenas 4 avaliações
+
+### STEPS
+num_train_epochs=1,
+
+max_steps=2000,
+
+### OTIMIZAÇÕES
+optim="adamw_torch_fused",
+
+gradient_checkpointing=True,
+
+### DATALOADER RÁPIDO
+dataloader_num_workers=2,  # 2 workers = balanço velocidade/RAM
+
+dataloader_pin_memory=True,
+
+### SEM EXTRAS
+report_to="none",
+
+load_best_model_at_end=False,
+
+disable_tqdm=False,
