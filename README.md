@@ -7,6 +7,7 @@ Com a base limpa nos optamos por quebrar a mesma em pedaços para melhorar a per
 
 
 ## Fine Tunning
+utilizamos o modelo ```unsloth/Llama-3.2-1B-bnb-4bit``` com os parametros: 
 
 ### BATCH - Otimizado para A100 sem estourar RAM
 per_device_train_batch_size=24,  # Máximo seguro para A100
